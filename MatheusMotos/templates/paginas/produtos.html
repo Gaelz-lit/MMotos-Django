@@ -1,0 +1,432 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produtos - MMotos</title>
+  <meta name="description" content="Confira nosso catálogo completo de peças para motos. Capacetes, pneus, óleos, peças de motor e muito mais.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">M<span>Motos</span></a>
+      
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="/">Início</a></li>
+          <li><a href="/produtos/" class="active">Produtos</a></li>
+          <li><a href="/servicos/">Serviços</a></li>
+          <li><a href="/contato/">Contato</a></li>
+        </ul>
+        
+        <a href="/carrinho/" class="cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span class="cart-count" style="display:none">0</span>
+        </a>
+        
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:24px;height:24px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Nossos Produtos</h2>
+      <p>Peças de qualidade para sua moto</p>
+    </div>
+    
+    <!-- FILTROS -->
+    <div class="filters-container">
+      <input type="text" class="search-input" placeholder="Buscar produtos..." id="search-input" oninput="filterProducts()">
+      
+      <select class="filter-select" id="category-filter" onchange="filterProducts()">
+        <option value="">Todas as Categorias</option>
+        <option value="capacetes">Capacetes</option>
+        <option value="pneus">Pneus</option>
+        <option value="oleos">Óleos e Lubrificantes</option>
+        <option value="pecas-motor">Peças de Motor</option>
+        <option value="acessorios">Acessórios</option>
+        <option value="freios">Freios</option>
+      </select>
+      
+      <select class="filter-select" id="sort-filter" onchange="filterProducts()">
+        <option value="">Ordenar por</option>
+        <option value="price-asc">Menor Preço</option>
+        <option value="price-desc">Maior Preço</option>
+        <option value="name">Nome A-Z</option>
+      </select>
+    </div>
+    
+    <!-- GRID DE PRODUTOS -->
+    <div class="products-grid" id="products-grid">
+      <!-- Os produtos serão renderizados aqui via JavaScript ou Django -->
+      
+      <!-- Produto 1 -->
+      <div class="product-card" data-category="capacetes" data-price="89900" data-name="Capacete Pro Racing">
+        <div class="product-image">
+          <span class="product-badge badge badge-accent">Destaque</span>
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Capacetes</span>
+          <h3 class="product-name">Capacete Pro Racing</h3>
+          <p class="product-description">Capacete fechado com viseira solar integrada e ventilação avançada</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 899,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem" 
+            onclick="addToCart({id:'capacete-pro-racing', name:'Capacete Pro Racing', price:89900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 2 -->
+      <div class="product-card" data-category="capacetes" data-price="34900" data-name="Capacete Urban">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Capacetes</span>
+          <h3 class="product-name">Capacete Urban</h3>
+          <p class="product-description">Capacete aberto ideal para uso urbano</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 349,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'capacete-urban', name:'Capacete Urban', price:34900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 3 -->
+      <div class="product-card" data-category="pneus" data-price="59900" data-name="Pneu Traseiro Sport 180/55">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Pneus</span>
+          <h3 class="product-name">Pneu Traseiro Sport 180/55</h3>
+          <p class="product-description">Pneu traseiro de alta performance para motos esportivas</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 599,00</span>
+            <span class="product-stock low">Restam 8</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'pneu-traseiro-sport', name:'Pneu Traseiro Sport 180/55', price:59900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 4 -->
+      <div class="product-card" data-category="pneus" data-price="44900" data-name="Pneu Dianteiro Sport 120/70">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Pneus</span>
+          <h3 class="product-name">Pneu Dianteiro Sport 120/70</h3>
+          <p class="product-description">Pneu dianteiro de alta aderência</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 449,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'pneu-dianteiro-sport', name:'Pneu Dianteiro Sport 120/70', price:44900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 5 -->
+      <div class="product-card" data-category="oleos" data-price="7900" data-name="Óleo Motor 10W40 Sintético">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Óleos</span>
+          <h3 class="product-name">Óleo Motor 10W40 Sintético</h3>
+          <p class="product-description">Óleo sintético de alta performance 1L</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 79,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'oleo-motor-10w40', name:'Óleo Motor 10W40 Sintético', price:7900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 6 -->
+      <div class="product-card" data-category="oleos" data-price="4500" data-name="Óleo Motor 20W50 Mineral">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Óleos</span>
+          <h3 class="product-name">Óleo Motor 20W50 Mineral</h3>
+          <p class="product-description">Óleo mineral de qualidade 1L</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 45,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'oleo-motor-20w50', name:'Óleo Motor 20W50 Mineral', price:4500, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 7 -->
+      <div class="product-card" data-category="pecas-motor" data-price="29900" data-name="Kit Relação Completo">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Peças de Motor</span>
+          <h3 class="product-name">Kit Relação Completo</h3>
+          <p class="product-description">Kit com coroa, pinhão e corrente</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 299,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'kit-relacao', name:'Kit Relação Completo', price:29900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 8 -->
+      <div class="product-card" data-category="pecas-motor" data-price="4900" data-name="Vela de Ignição NGK">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Peças de Motor</span>
+          <h3 class="product-name">Vela de Ignição NGK</h3>
+          <p class="product-description">Vela de ignição original NGK</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 49,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'vela-ignicao-ngk', name:'Vela de Ignição NGK', price:4900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 9 -->
+      <div class="product-card" data-category="acessorios" data-price="15900" data-name="Retrovisor Esportivo Par">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Acessórios</span>
+          <h3 class="product-name">Retrovisor Esportivo Par</h3>
+          <p class="product-description">Par de retrovisores esportivos universais</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 159,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'retrovisor-esportivo', name:'Retrovisor Esportivo Par', price:15900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 10 -->
+      <div class="product-card" data-category="acessorios" data-price="8900" data-name="Manopla Racing Gel">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Acessórios</span>
+          <h3 class="product-name">Manopla Racing Gel</h3>
+          <p class="product-description">Par de manoplas com gel anti-vibração</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 89,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'manopla-racing-gel', name:'Manopla Racing Gel', price:8900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 11 -->
+      <div class="product-card" data-category="freios" data-price="12900" data-name="Pastilha Freio Dianteira">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Freios</span>
+          <h3 class="product-name">Pastilha Freio Dianteira</h3>
+          <p class="product-description">Pastilha de freio cerâmica alta performance</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 129,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'pastilha-freio', name:'Pastilha Freio Dianteira', price:12900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 12 -->
+      <div class="product-card" data-category="freios" data-price="24900" data-name="Disco de Freio Wave">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Freios</span>
+          <h3 class="product-name">Disco de Freio Wave</h3>
+          <p class="product-description">Disco de freio recortado estilo wave</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 249,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'disco-freio-wave', name:'Disco de Freio Wave', price:24900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MMotos</h4>
+        <p>Sua loja especializada em peças e serviços para motos.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Links Rápidos</h4>
+        <a href="/produtos/">Produtos</a>
+        <a href="/servicos/">Serviços</a>
+        <a href="/contato/">Contato</a>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <p>contato@mmotos.com.br</p>
+        <p>(11) 99999-9999</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 MMotos. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/cart.js' %}"></script>
+  <script>
+    // Função de filtro de produtos
+    function filterProducts() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const category = document.getElementById('category-filter').value;
+      const sort = document.getElementById('sort-filter').value;
+      
+      const products = document.querySelectorAll('.product-card');
+      let visibleProducts = [];
+      
+      products.forEach(product => {
+        const name = product.dataset.name.toLowerCase();
+        const productCategory = product.dataset.category;
+        
+        const matchesSearch = name.includes(searchTerm);
+        const matchesCategory = !category || productCategory === category;
+        
+        if (matchesSearch && matchesCategory) {
+          product.style.display = 'block';
+          visibleProducts.push(product);
+        } else {
+          product.style.display = 'none';
+        }
+      });
+      
+      // Ordenar se necessário
+      if (sort && visibleProducts.length > 0) {
+        const grid = document.getElementById('products-grid');
+        
+        visibleProducts.sort((a, b) => {
+          if (sort === 'price-asc') {
+            return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+          } else if (sort === 'price-desc') {
+            return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+          } else if (sort === 'name') {
+            return a.dataset.name.localeCompare(b.dataset.name);
+          }
+          return 0;
+        });
+        
+        visibleProducts.forEach(product => {
+          grid.appendChild(product);
+        });
+      }
+    }
+    
+    // Verificar parâmetros da URL ao carregar
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoria = urlParams.get('categoria');
+      
+      if (categoria) {
+        document.getElementById('category-filter').value = categoria;
+        filterProducts();
+      }
+    });
+  </script>
+</body>
+</html>

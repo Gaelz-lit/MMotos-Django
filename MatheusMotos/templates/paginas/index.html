@@ -1,0 +1,400 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMotos - Peças e Serviços para Motos</title>
+  <meta name="description" content="Loja especializada em peças e serviços para motos. Qualidade e confiança para você rodar com segurança.">
+  
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">M<span>Motos</span></a>
+      
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="/" class="active">Início</a></li>
+          <li><a href="/produtos/">Produtos</a></li>
+          <li><a href="/servicos/">Serviços</a></li>
+          <li><a href="/contato/">Contato</a></li>
+        </ul>
+        
+        <a href="/carrinho/" class="cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span class="cart-count" style="display:none">0</span>
+        </a>
+        
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:24px;height:24px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="text-balance">Peças e Serviços de Qualidade para sua Moto</h1>
+        <p>Encontre tudo o que você precisa para manter sua moto em perfeito estado. Peças originais, preços justos e serviços especializados.</p>
+        <div class="hero-buttons">
+          <a href="/produtos/" class="btn btn-accent btn-lg">Ver Produtos</a>
+          <a href="/servicos/" class="btn btn-outline btn-lg" style="border-color:white;color:white">Nossos Serviços</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <!-- Adicione uma imagem de moto aqui -->
+        <div style="width:350px;height:250px;background:rgba(255,255,255,0.1);border-radius:1rem;display:flex;align-items:center;justify-content:center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:100px;height:100px;opacity:0.5">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10 M16.5 9.5L14 6h-3 M3 11h10" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIAS -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Categorias</h2>
+      <p>Encontre o que precisa de forma rápida</p>
+    </div>
+    
+    <div class="categories-grid">
+      <a href="produtos?categoria=capacetes" class="category-card">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h3>Capacetes</h3>
+      </a>
+      
+      <a href="/produtos/?categoria=pneus" class="category-card">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3>Pneus</h3>
+      </a>
+      
+      <a href="produtos?categoria=oleos" class="category-card">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+        <h3>Óleos</h3>
+      </a>
+      
+      <a href="/produtos/?categoria=pecas-motor" class="category-card">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <h3>Peças de Motor</h3>
+      </a>
+      
+      <a href="/produtos/?categoria=acessorios" class="category-card">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
+        </div>
+        <h3>Acessórios</h3>
+      </a>
+      
+      <a href="/produtos/?categoria=freios" class="category-card">
+        <div class="category-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+          </svg>
+        </div>
+        <h3>Freios</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- PRODUTOS EM DESTAQUE -->
+  <section class="section" style="background-color: var(--white)">
+    <div class="section-header">
+      <h2>Produtos em Destaque</h2>
+      <p>Os mais vendidos da nossa loja</p>
+    </div>
+    
+    <div class="products-grid">
+      <!-- Produto 1 -->
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-badge badge badge-accent">Destaque</span>
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Capacetes</span>
+          <h3 class="product-name">Capacete Pro Racing</h3>
+          <p class="product-description">Capacete fechado com viseira solar integrada e ventilação avançada</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 899,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem" 
+            onclick="addToCart({id:'capacete-pro-racing', name:'Capacete Pro Racing', price:89900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 2 -->
+      <div class="product-card">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Pneus</span>
+          <h3 class="product-name">Pneu Traseiro Sport 180/55</h3>
+          <p class="product-description">Pneu traseiro de alta performance para motos esportivas</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 599,00</span>
+            <span class="product-stock low">Restam 8</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'pneu-traseiro-sport', name:'Pneu Traseiro Sport 180/55', price:59900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 3 -->
+      <div class="product-card">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Óleos</span>
+          <h3 class="product-name">Óleo Motor 10W40 Sintético</h3>
+          <p class="product-description">Óleo sintético de alta performance 1L</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 79,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'oleo-motor-10w40', name:'Óleo Motor 10W40 Sintético', price:7900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+      
+      <!-- Produto 4 -->
+      <div class="product-card">
+        <div class="product-image">
+          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="product-content">
+          <span class="product-category">Peças de Motor</span>
+          <h3 class="product-name">Kit Relação Completo</h3>
+          <p class="product-description">Kit com coroa, pinhão e corrente</p>
+          <div class="product-footer">
+            <span class="product-price">R$ 299,00</span>
+            <span class="product-stock">Em estoque</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+            onclick="addToCart({id:'kit-relacao', name:'Kit Relação Completo', price:29900, type:'product'})">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/produtos/" class="btn btn-outline">Ver Todos os Produtos</a>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Nossos Serviços</h2>
+      <p>Manutenção profissional para sua moto</p>
+    </div>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+        </div>
+        <h3 class="service-name">Revisão Completa</h3>
+        <p class="service-description">Revisão completa com verificação de todos os sistemas da moto</p>
+        <div class="service-footer">
+          <span class="service-price">R$ 250,00</span>
+          <span class="service-duration">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:16px;height:16px">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            2h
+          </span>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+        <h3 class="service-name">Troca de Óleo</h3>
+        <p class="service-description">Troca de óleo do motor com filtro incluso</p>
+        <div class="service-footer">
+          <span class="service-price">R$ 80,00</span>
+          <span class="service-duration">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:16px;height:16px">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            30min
+          </span>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="service-name">Balanceamento de Rodas</h3>
+        <p class="service-description">Balanceamento das duas rodas para maior estabilidade</p>
+        <div class="service-footer">
+          <span class="service-price">R$ 60,00</span>
+          <span class="service-duration">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:16px;height:16px">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            45min
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/servicos/" class="btn btn-primary">Ver Todos os Serviços</a>
+    </div>
+  </section>
+
+  <!-- POR QUE NOS ESCOLHER -->
+  <section class="section" style="background-color: var(--primary); color: white">
+    <div class="section-header" style="color: white">
+      <h2>Por que escolher a MMotos?</h2>
+      <p style="color: rgba(255,255,255,0.8)">Qualidade e confiança em cada peça e serviço</p>
+    </div>
+    
+    <div class="categories-grid" style="max-width: 900px">
+      <div style="text-align:center;padding:1.5rem">
+        <div style="width:64px;height:64px;margin:0 auto 1rem;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:32px;height:32px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h3 style="font-size:1.125rem;margin-bottom:0.5rem">Garantia de Qualidade</h3>
+        <p style="font-size:0.875rem;opacity:0.8">Todas as peças com garantia de fábrica</p>
+      </div>
+      
+      <div style="text-align:center;padding:1.5rem">
+        <div style="width:64px;height:64px;margin:0 auto 1rem;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:32px;height:32px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 style="font-size:1.125rem;margin-bottom:0.5rem">Preços Justos</h3>
+        <p style="font-size:0.875rem;opacity:0.8">Melhor custo-benefício do mercado</p>
+      </div>
+      
+      <div style="text-align:center;padding:1.5rem">
+        <div style="width:64px;height:64px;margin:0 auto 1rem;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:32px;height:32px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <h3 style="font-size:1.125rem;margin-bottom:0.5rem">Entrega Rápida</h3>
+        <p style="font-size:0.875rem;opacity:0.8">Envio em até 24h para todo o Brasil</p>
+      </div>
+      
+      <div style="text-align:center;padding:1.5rem">
+        <div style="width:64px;height:64px;margin:0 auto 1rem;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:32px;height:32px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </div>
+        <h3 style="font-size:1.125rem;margin-bottom:0.5rem">Suporte Técnico</h3>
+        <p style="font-size:0.875rem;opacity:0.8">Atendimento especializado sempre disponível</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MMotos</h4>
+        <p>Sua loja especializada em peças e serviços para motos. Qualidade e confiança desde 2020.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Links Rápidos</h4>
+        <a href="/produtos/">Produtos</a>
+        <a href="/servicos/">Serviços</a>
+        <a href="/contato/">Contato</a>
+        <a href="/sobre/">Sobre Nós</a>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Categorias</h4>
+        <a href="/produtos/?categoria=capacetes">Capacetes</a>
+        <a href="/produtos/?categoria=pneus">Pneus</a>
+        <a href="/produtos/?categoria=oleos">Óleos</a>
+        <a href="/produtos/?categoria=pecas-motor">Peças de Motor</a>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <p>contato@mmotos.com.br</p>
+        <p>(11) 99999-9999</p>
+        <p>Pernambuco - PE</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 MMotos. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="{% static 'js/cart.js' %}"></script>
+</body>
+</html>

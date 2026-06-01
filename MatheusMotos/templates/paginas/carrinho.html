@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho - MMotos</title>
+  <meta name="description" content="Seu carrinho de compras na MMotos.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">M<span>Motos</span></a>
+      
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="/">Início</a></li>
+          <li><a href="/produtos/">Produtos</a></li>
+          <li><a href="/servicos/">Serviços</a></li>
+          <li><a href="/contato/">Contato</a></li>
+        </ul>
+        
+        <a href="/carrinho/" class="cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span class="cart-count" style="display:none">0</span>
+        </a>
+        
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:24px;height:24px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CARRINHO -->
+  <section class="cart-page">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h1 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem;">Carrinho de Compras</h1>
+      
+      <div class="cart-container">
+        <div class="cart-items" id="cart-items">
+          <!-- Renderizado via JavaScript -->
+        </div>
+        
+        <div class="cart-summary" id="cart-summary">
+          <!-- Renderizado via JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MMotos</h4>
+        <p>Sua loja especializada em peças e serviços para motos.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Links Rápidos</h4>
+        <a href="/produtos/">Produtos</a>
+        <a href="/servicos/">Serviços</a>
+        <a href="/contato/">Contato</a>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <p>contato@mmotos.com.br</p>
+        <p>(11) 99999-9999</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 MMotos. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/cart.js' %}"></script>
+</body>
+</html>
