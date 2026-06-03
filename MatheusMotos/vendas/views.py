@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import produto
 # Create your views here.
 
 
@@ -8,7 +9,9 @@ from django.http import HttpResponse
 
 #tu, gael
 def vendas(request):
-    return render(request, 'paginas/index.html')
+    produtos = produto.objects.all()
+
+    return render(request, 'paginas/index.html', {'produtos': produtos})
 
 def carrinho(request):
     return render(request, 'paginas/carrinho.html')

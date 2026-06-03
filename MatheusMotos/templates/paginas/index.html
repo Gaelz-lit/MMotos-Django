@@ -142,6 +142,7 @@
     
     <div class="products-grid">
       <!-- Produto 1 -->
+      {% for produto in produtos %}
       <div class="product-card">
         <div class="product-image">
           <span class="product-badge badge badge-accent">Destaque</span>
@@ -150,19 +151,25 @@
           </svg>
         </div>
         <div class="product-content">
-          <span class="product-category">Capacetes</span>
-          <h3 class="product-name">Capacete Pro Racing</h3>
-          <p class="product-description">Capacete fechado com viseira solar integrada e ventilação avançada</p>
+          <span class="product-category"> {{ produto.categoria }} </span>
+          <h3 class="product-name"> {{ produto.nome }} </h3>
+          <p class="product-description"> {{ produto.descricao }} </p>
           <div class="product-footer">
-            <span class="product-price">R$ 899,00</span>
+            <span class="product-price">R$ {{ produto.valor|floatformat:2 }}</span>
             <span class="product-stock">Em estoque</span>
           </div>
           <button class="btn btn-primary" style="width:100%;margin-top:1rem" 
-            onclick="addToCart({id:'capacete-pro-racing', name:'Capacete Pro Racing', price:89900, type:'product'})">
+            onclick="addToCart({
+              id:'{{ produto.id }}',
+              name:'{{ produto.nome }}',
+              price: Math.round(parseFloat('{{ produto.valor }}') * 100),
+              type:'product'
+              })">
             Adicionar ao Carrinho
           </button>
         </div>
       </div>
+      {% endfor %}
       
       <!-- Produto 2 -->
       <div class="product-card">
