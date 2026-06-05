@@ -146,9 +146,13 @@
       <div class="product-card">
         <div class="product-image">
           <span class="product-badge badge badge-accent">Destaque</span>
-          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
+          {% if produto.imagem %}
+            <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" style="width:100%;height:100%;object-fit:cover;border-radius:0.5rem">
+          {% else %}
+            <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          {% endif %}
         </div>
         <div class="product-content">
           <span class="product-category"> {{ produto.categoria }} </span>
@@ -251,24 +255,26 @@
     </div>
     
     <div class="services-grid">
+      {% for servico in servicos %}
       <div class="service-card">
         <div class="service-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
           </svg>
         </div>
-        <h3 class="service-name">Revisão Completa</h3>
-        <p class="service-description">Revisão completa com verificação de todos os sistemas da moto</p>
+        <h3 class="service-name">{{ servico.nome }}</h3>
+        <p class="service-description">{{ servico.descricao }}</p>
         <div class="service-footer">
-          <span class="service-price">R$ 250,00</span>
+          <span class="service-price">R$ {{ servico.valor|floatformat:2 }}</span>
           <span class="service-duration">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:16px;height:16px">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            2h
+            {{ servico.duracao }}
           </span>
         </div>
       </div>
+      {% endfor %}
       
       <div class="service-card">
         <div class="service-icon">

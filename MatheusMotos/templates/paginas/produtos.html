@@ -56,12 +56,12 @@
       
       <select class="filter-select" id="category-filter" onchange="filterProducts()">
         <option value="">Todas as Categorias</option>
-        <option value="capacetes">Capacetes</option>
-        <option value="pneus">Pneus</option>
-        <option value="oleos">Óleos e Lubrificantes</option>
-        <option value="pecas-motor">Peças de Motor</option>
-        <option value="acessorios">Acessórios</option>
-        <option value="freios">Freios</option>
+        <option value="Capacetes">Capacetes</option>
+        <option value="Pneus">Pneus</option>
+        <option value="Óleos">Óleos e Lubrificantes</option>
+        <option value="Peças de Motor">Peças de Motor</option>
+        <option value="Acessórios">Acessórios</option>
+        <option value="Freios">Freios</option>
       </select>
       
       <select class="filter-select" id="sort-filter" onchange="filterProducts()">
@@ -77,49 +77,59 @@
       <!-- Os produtos serão renderizados aqui via JavaScript ou Django -->
       
       <!-- Produto 1 -->
-      <div class="product-card" data-category="capacetes" data-price="89900" data-name="Capacete Pro Racing">
+      {% if produtos %}
+      <div class="product-card" data-category="{{ produtos.0.categoria }}" data-price="{{ produtos.0.valor }}" data-name="{{ produtos.0.nome }}">
         <div class="product-image">
           <span class="product-badge badge badge-accent">Destaque</span>
-          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
+          {% if produtos.0.imagem %}
+            <img src="{{ produtos.0.imagem.url }}" alt="{{ produtos.0.nome }}" style="width:100%;height:100%;object-fit:cover;border-radius:0.5rem">
+          {% else %}
+            <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          {% endif %}
         </div>
         <div class="product-content">
-          <span class="product-category">Capacetes</span>
-          <h3 class="product-name">Capacete Pro Racing</h3>
-          <p class="product-description">Capacete fechado com viseira solar integrada e ventilação avançada</p>
+          <span class="product-category">{{ produtos.0.categoria }}</span>
+          <h3 class="product-name">{{ produtos.0.nome }}</h3>
+          <p class="product-description">{{ produtos.0.descricao }}</p>
           <div class="product-footer">
-            <span class="product-price">R$ 899,00</span>
+            <span class="product-price">R$ {{ produtos.0.valor|floatformat:2 }}</span>
             <span class="product-stock">Em estoque</span>
           </div>
           <button class="btn btn-primary" style="width:100%;margin-top:1rem" 
-            onclick="addToCart({id:'capacete-pro-racing', name:'Capacete Pro Racing', price:89900, type:'product'})">
+            onclick="addToCart({id:'{{ produtos.0.id }}', name:'{{ produtos.0.nome }}', price: Math.round('{{ produtos.0.valor }}' * 100), type:'product'})">
             Adicionar ao Carrinho
           </button>
         </div>
       </div>
+      {% endif %}
       
       <!-- Produto 2 -->
-      <div class="product-card" data-category="capacetes" data-price="34900" data-name="Capacete Urban">
-        <div class="product-image">
-          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-        </div>
-        <div class="product-content">
-          <span class="product-category">Capacetes</span>
-          <h3 class="product-name">Capacete Urban</h3>
-          <p class="product-description">Capacete aberto ideal para uso urbano</p>
-          <div class="product-footer">
-            <span class="product-price">R$ 349,00</span>
-            <span class="product-stock">Em estoque</span>
+      {%for produto in produtos %}
+        {% if not forloop.first %}
+        <div class="product-card" data-category="{{ produto.categoria }}" data-price="{{ produto.valor }}" data-name="{{ produto.nome }}">
+          <div class="product-image">
+            <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
           </div>
-          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
-            onclick="addToCart({id:'capacete-urban', name:'Capacete Urban', price:34900, type:'product'})">
-            Adicionar ao Carrinho
-          </button>
+          <div class="product-content">
+            <span class="product-category">{{ produto.categoria }}</span>
+            <h3 class="product-name">{{ produto.nome }}</h3>
+            <p class="product-description">{{ produto.descricao }}</p>
+            <div class="product-footer">
+              <span class="product-price">R$ {{ produto.valor|floatformat:2 }}</span>
+              <span class="product-stock">Em estoque</span>
+            </div>
+            <button class="btn btn-primary" style="width:100%;margin-top:1rem"
+              onclick="addToCart({id:'{{ produto.id }}', name:'{{ produto.nome }}', price: Math.round('{{ produto.valor }}' * 100), type:'product'})">
+              Adicionar ao Carrinho
+            </button>
+          </div>
         </div>
-      </div>
+        {% endif %}
+      {% endfor %}
       
       <!-- Produto 3 -->
       <div class="product-card" data-category="pneus" data-price="59900" data-name="Pneu Traseiro Sport 180/55">
