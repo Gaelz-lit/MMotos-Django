@@ -856,3 +856,78 @@ img {
 .animate-in {
   animation: fadeIn 0.3s ease-out;
 }
+
+.cbBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--white);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cbBox {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 350px;
+  height: 500px;
+  background-color: var(--white);
+  border-radius: 1px solid var(--border);
+  display: none;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+}
+
+.chatOpt {
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.cbHeader {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.cbMsg {
+  padding: 15px;
+  overflow-y: auto;
+  height: 380px;
+}
+
+.chat-message {
+  margin-bottom: 0.5rem;
+}
+
+.cbInput {
+  border: 1px solid var(--border);
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  border-radius: var(--radius);
+}
+
+.cbInput:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.bot-msg {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 10px;
+  border-radius: var(--radius);
+  max-width: 80%;
+  margin-bottom: 10px;
+}

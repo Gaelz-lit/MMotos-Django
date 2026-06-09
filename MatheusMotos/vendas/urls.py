@@ -12,3 +12,10 @@ urlpatterns = [
     path('produtos/', views.produtos, name='produtos'),
     
 ]
+
+#DASHBOARD
+"""
+
+urlpatterns = [
+    path('', views.dashboard, name='dashboard'),
+    ]"""

@@ -21,13 +21,14 @@
       
       <nav class="nav">
         <ul class="nav-links">
-          <li><a href="/">Início</a></li>
-          <li><a href="/produtos/" class="active">Produtos</a></li>
-          <li><a href="/servicos/">Serviços</a></li>
-          <li><a href="/contato/">Contato</a></li>
+          <li><a href="{% url 'admin:index' %}">Admin</a></li>
+          <li><a href="{% url 'vendas' %}">Início</a></li>
+          <li><a href="{% url 'produtos' %}" class="active">Produtos</a></li>
+          <li><a href="{% url 'servicos' %}">Serviços</a></li>
+          <li><a href="/#">Contato</a></li>
         </ul>
         
-        <a href="/carrinho/" class="cart-btn">
+        <a href="{% url 'carrinho' %}" class="cart-btn">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
@@ -98,7 +99,11 @@
             <span class="product-stock">Em estoque</span>
           </div>
           <button class="btn btn-primary" style="width:100%;margin-top:1rem" 
-            onclick="addToCart({id:'{{ produtos.0.id }}', name:'{{ produtos.0.nome }}', price: Math.round('{{ produtos.0.valor }}' * 100), type:'product'})">
+            onclick="addToCart({
+              id:'{{ produtos.0.id }}',
+              name:'{{ produtos.0.nome }}',
+              price: Math.round(parseFloat('{{ produtos.0.valor }}') * 100),
+              type:'product'})">
             Adicionar ao Carrinho
           </button>
         </div>
@@ -110,9 +115,13 @@
         {% if not forloop.first %}
         <div class="product-card" data-category="{{ produto.categoria }}" data-price="{{ produto.valor }}" data-name="{{ produto.nome }}">
           <div class="product-image">
-            <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {% if produto.imagem %}
+              <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" style="width:100%;height:100%;object-fit:cover;border-radius:0.5rem">
+            {% else %}
+             <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
+             </svg>
+            {% endif %}
           </div>
           <div class="product-content">
             <span class="product-category">{{ produto.categoria }}</span>
@@ -123,7 +132,11 @@
               <span class="product-stock">Em estoque</span>
             </div>
             <button class="btn btn-primary" style="width:100%;margin-top:1rem"
-              onclick="addToCart({id:'{{ produto.id }}', name:'{{ produto.nome }}', price: Math.round('{{ produto.valor }}' * 100), type:'product'})">
+              onclick="addToCart({
+                id:'{{ produto.id }}',
+                name:'{{ produto.nome }}',
+                price: Math.round(parseFloat('{{ produto.valor }}') * 100),
+                type:'product'})">
               Adicionar ao Carrinho
             </button>
           </div>
@@ -363,9 +376,9 @@
       
       <div class="footer-section">
         <h4>Links Rápidos</h4>
-        <a href="/produtos/">Produtos</a>
-        <a href="/servicos/">Serviços</a>
-        <a href="/contato/">Contato</a>
+        <a href="{% url 'produtos' %}">Produtos</a>
+        <a href="{% url 'servicos' %}">Serviços</a>
+        <a href="./#">Contato</a>
       </div>
       
       <div class="footer-section">
@@ -379,6 +392,13 @@
       <p>&copy; 2024 MMotos. Todos os direitos reservados.</p>
     </div>
   </footer>
+
+  <button id="chat-bot-btn" class="cbBtn">?</button>
+  <div id="chat-bot-box" class="cbBox">
+    <div class="cbHeader">Chat de Suporte</div>
+    <div class="cbMsg" id="cbMsg">Olá! Como posso ajudar?</div>
+    <input type="text" id="cbInput" class="cbInput" placeholder="Digite sua mensagem..." onkeypress="handleChatInput(event)">
+  </div>
 
   <script src="{% static 'js/cart.js' %}"></script>
   <script>

@@ -6,7 +6,6 @@ from datetime import timedelta
 
 class categoria(models.Model):
     nome = models.CharField(max_length=100, unique=True)
-    #descricao = models.TextField(blank=True)
 
 
     class Meta:
@@ -18,7 +17,6 @@ class categoria(models.Model):
         return self.nome
 
 class produto (models.Model):
-    #adicionar a quantidade do estoque e detalhar que essa quantidade é a quantidade disponivel 
     nome = models.CharField(max_length=50)
     descricao = models.TextField(blank=True, null=True)
     valor = models.DecimalField(max_digits=10,decimal_places=2)
@@ -46,7 +44,6 @@ class produto (models.Model):
         return self.nome
 
 class servico (models.Model):
-    #adicionar a quantidade do estoque e detalhar que essa quantidade é a quantidade disponivel
     nome = models.CharField(max_length=50)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     descricao = models.TextField(blank=True, null=True)
@@ -65,7 +62,8 @@ class servico (models.Model):
     
 class cliente (models.Model):
     nome = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=11, unique=True)   
+    #telefone = models.CharFild(max_length=11)
+    cpf = models.CharField(max_length=11, unique=True, primary_key=True)
 
     class Meta: 
         verbose_name = 'cliente'
@@ -74,8 +72,50 @@ class cliente (models.Model):
 
     def __str__(self):
         return self.nome
+    
+class agendamento (models.Model):
+    data_hora = models.DateTimeField(verbose_name='Data e Hora do Agendamento')
 
-#historico representa a NF que o cliente vai receber tambem
+    STATUS_CHOICES = [
+        ('P', 'Pendente'),
+        ('C', 'Confirmado'),
+        ('F', 'Finalizado'),
+        ('X', 'Cancelado'),
+    ]
+
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='P')
+    observacoes = models.TextField(blank=True, null=True)
+
+
+    #RELACIONAMENTOS 
+
+    cliente = models.ForeignKey(
+        'cliente',
+        on_delete=models.PROTECT,
+        related_name='agendamentos',
+        verbose_name='Cliente'
+
+    )
+
+    servico = models.ForeignKey(
+        'servico',
+        on_delete=models.PROTECT,
+        related_name='agendamentos',
+        verbose_name='Serviço'
+    )
+
+
+    class Meta: 
+        verbose_name = 'agendamento'
+        verbose_name_plural = 'agendamento'
+        ordering =  ['data_hora']
+
+    def __str__(self):
+        return f'{self.cliente} - {self.servico}'
+
+
+
+#historico representa tbm a NF 
 class historicos (models.Model):
     nome = models.CharField(max_length=50)
     valortotal = models.DecimalField(max_digits=10, decimal_places=2)

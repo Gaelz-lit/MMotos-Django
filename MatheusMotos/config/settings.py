@@ -144,7 +144,10 @@ JAZZMIN_SETTINGS = {
     "show_ui_builder": True,
 
     "topmenu_links": [
-        {"name": "Home", "url": "/", "new_window": True},
+        {"name": "Home", "url": "/", "new_window": False},
+        {"name": "Produtos", "url": "/produtos/", "new_window": False},
+        {"name": "Serviços", "url": "/servicos/", "new_window": False},
+        {"name": "Carrinho", "url": "/carrinho/", "new_window": False},
     ],
     "copyright": "MMotos - 2024",
 }

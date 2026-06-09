@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import produto, servico
-# Create your views here.
+from .models import produto, servico, historicos
 
 
 #def home(request):
@@ -28,3 +27,19 @@ def produtos(request):
     return render(request, 'paginas/produtos.html', {'produtos': produtos})
 
 #eu, jacke
+
+#DASHBOARD
+"""def dashboard(request):
+
+faturamento = Historico.objects.aggregate(total=Sum('valortotal'))['total'] or 0
+total_clientes = Cliente.objects.count()
+total_servicos = Servico.objects.count()
+
+ context = {
+        'total_clientes': total_clientes,
+        'total_servicos': total_servicos,
+        'faturamento': faturamento,
+    }
+
+     return render(request, 'paginas/dashboard.html', context)
+"""

@@ -21,13 +21,14 @@
       
       <nav class="nav">
         <ul class="nav-links">
-          <li><a href="/">Início</a></li>
-          <li><a href="/produtos/">Produtos</a></li>
-          <li><a href="/servicos/" class="active">Serviços</a></li>
-          <li><a href="/contato/">Contato</a></li>
+          <li><a href="{% url 'admin:index' %}">Admin</a></li>
+          <li><a href="{% url 'vendas' %}">Início</a></li>
+          <li><a href="{% url 'produtos' %}">Produtos</a></li>
+          <li><a href="{% url 'servicos' %}" class="active">Serviços</a></li>
+          <li><a href="./#">Contato</a></li>
         </ul>
         
-        <a href="/carrinho/" class="cart-btn">
+        <a href="{% url 'carrinho' %}" class="cart-btn">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
@@ -53,16 +54,17 @@
   <section class="section">
     <div class="services-grid">
       <!-- Serviço 1 -->
+      {% for servico in servicos %}
       <div class="service-card">
         <div class="service-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
           </svg>
         </div>
-        <h3 class="service-name">Revisão Completa</h3>
-        <p class="service-description">Revisão completa com verificação de todos os sistemas da moto: freios, suspensão, elétrica, motor, transmissão e muito mais.</p>
+        <h3 class="service-name">{{ servico.nome }}</h3>
+        <p class="service-description">{{ servico.descricao }}</p>
         <div class="service-footer">
-          <span class="service-price">R$ 250,00</span>
+          <span class="service-price">R$ {{ servico.valor|floatformat:2 }}</span>
           <span class="service-duration">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:16px;height:16px">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -71,10 +73,15 @@
           </span>
         </div>
         <button class="btn btn-primary" style="width:100%;margin-top:1rem"
-          onclick="addToCart({id:'revisao-completa', name:'Revisão Completa', price:25000, type:'service'})">
+          onclick="addToCart({
+            id:'{{ servico.id }}',
+            name:'{{ servico.nome }}',
+            price: Math.round(parseFloat('{{ servico.valor }}') * 100),
+            type:'service'})">
           Agendar Serviço
         </button>
       </div>
+      {% endfor %}
       
       <!-- Serviço 2 -->
       <div class="service-card">
@@ -237,9 +244,9 @@
       
       <div class="footer-section">
         <h4>Links Rápidos</h4>
-        <a href="/produtos/">Produtos</a>
-        <a href="/servicos/">Serviços</a>
-        <a href="/contato/">Contato</a>
+        <a href="{% url 'produtos' %}">Produtos</a>
+        <a href="{% url 'servicos' %}">Serviços</a>
+        <a href="./#">Contato</a>
       </div>
       
       <div class="footer-section">
@@ -253,6 +260,13 @@
       <p>&copy; 2024 MMotos. Todos os direitos reservados.</p>
     </div>
   </footer>
+
+  <button id="chat-bot-btn" class="cbBtn">?</button>
+  <div id="chat-bot-box" class="cbBox">
+    <div class="cbHeader">Chat de Suporte</div>
+    <div class="cbMsg" id="cbMsg">Olá! Como posso ajudar?</div>
+    <input type="text" id="cbInput" class="cbInput" placeholder="Digite sua mensagem..." onkeypress="handleChatInput(event)">
+  </div>
 
   <script src="{% static 'js/cart.js' %}"></script>
 </body>
