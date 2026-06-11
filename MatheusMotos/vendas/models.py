@@ -63,7 +63,7 @@ class servico (models.Model):
 class cliente (models.Model):
     nome = models.CharField(max_length=50)
     #telefone = models.CharFild(max_length=11)
-    cpf = models.CharField(max_length=11, unique=True, primary_key=True)
+    cpf = models.CharField(max_length=11, unique=True)
 
     class Meta: 
         verbose_name = 'cliente'

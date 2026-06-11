@@ -1,7 +1,8 @@
 from django.contrib import admin
+
 # Register your models here.
 
-from .models import produto, servico, categoria, agendamento
+from .models import produto, servico, categoria, agendamento, historicos
 
 
 @admin.register(agendamento)
@@ -11,10 +12,23 @@ class agendamentoAdmin(admin.ModelAdmin):
     search_filds = ('cliente__nome', 'servico__nome',)
     ordering = ('data_hora',)
 
-    #actions = ['finalizar_servico']
+    actions = ['finalizar_servico']
+    def finalizar_servico(self, request , queryset):
 
-    
+        for ag in queryset:
 
+            ag.status = 'F'
+            ag.save()
+
+            historico = historicos.objects.create(
+                nome=f'NF - {ag.cliente.nome}',
+                cliente=ag.cliente,
+                valortotal=ag.servico.valor
+            )
+
+            historico.servico.add(ag.servico)
+
+    finalizar_servico.short_description = ('Finalizar serviço e gerar histórico')
 
 
 

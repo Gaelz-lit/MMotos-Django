@@ -31,15 +31,15 @@ def produtos(request):
 #DASHBOARD
 """def dashboard(request):
 
-faturamento = Historico.objects.aggregate(total=Sum('valortotal'))['total'] or 0
-total_clientes = Cliente.objects.count()
-total_servicos = Servico.objects.count()
+   faturamento = Historico.objects.aggregate(total=Sum('valortotal'))['total'] or 0
+   total_clientes = Cliente.objects.count()
+   total_servicos = Servico.objects.count()
 
- context = {
+context = {
         'total_clientes': total_clientes,
         'total_servicos': total_servicos,
         'faturamento': faturamento,
     }
 
-     return render(request, 'paginas/dashboard.html', context)
-"""
+    return render(request, 'paginas/dashboard.html', context)"""
+

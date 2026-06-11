@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MMotos</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="backgroundCd">
+
+<div class="auth-container">
+
+    <div class="auth-card">
+        <a href="/" class="logoCd">Cadastro</a>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+
+            <div class="form-group">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+            </div>
+
+            <div class="form-group">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+            </div>
+
+            <button type="submit" class="btn-auth">
+                Cadastrar
+            </button>
+
+            <p class="auth-link">
+                Já possui conta?
+                <a href="{% url 'login' %}">
+                    Faça login
+                </a>
+            </p>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

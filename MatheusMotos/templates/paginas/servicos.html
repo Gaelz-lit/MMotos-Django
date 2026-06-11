@@ -262,12 +262,14 @@
   </footer>
 
   <button id="chat-bot-btn" class="cbBtn">?</button>
+
   <div id="chat-bot-box" class="cbBox">
-    <div class="cbHeader">Chat de Suporte</div>
-    <div class="cbMsg" id="cbMsg">Olá! Como posso ajudar?</div>
-    <input type="text" id="cbInput" class="cbInput" placeholder="Digite sua mensagem..." onkeypress="handleChatInput(event)">
+    <div class="cbHeader">Assistente MMotos</div>
+
+    <div id="cbMsg" class="cbMsg"></div>
   </div>
 
+  <script src="{% static 'js/chat.js' %}"></script>
   <script src="{% static 'js/cart.js' %}"></script>
 </body>
 </html>

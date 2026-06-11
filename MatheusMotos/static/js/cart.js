@@ -243,37 +243,3 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCart();
   }
 });
-
-const cbBtn = document.getElementById('chat-bot-btn');
-const cbBox = document.getElementById('chat-bot-box'); 
-
-cbBtn.addEventListener('click', () => {
-  if (cbBox.style.display === 'flex') {
-    cbBox.style.display = "none";
-  } else {
-    cbBox.style.display = "flex";
-  }
-});
-
-function responder(opcao) {
-  const chat = document.getElementById('cbMsg');
-
-  let resposta = '';
-
-  switch(opcao) {
-    case 'horario':
-      resposta = 'Estamos abertos de segunda a sexta, das 8h às 18h, e aos sábados, das 9h às 14h.';
-      break;
-    case 'produtos':
-      resposta = 'Oferecemos uma variedade de peças e acessórios para motos. Visite nossa seção de produtos para mais detalhes!';
-      break;
-    case 'servicos':
-      resposta = 'Realizamos manutenção, revisão e personalização de motos. Confira nossos serviços para mais informações!';
-      break;
-    case 'contato':
-      resposta = 'Você pode nos contatar pelo telefone (11) 9999-9999 ou pelo email contato@mmotos.com.br';
-      break;
-  }
-
-  chat.innerHTML += `<div class="bot-msg">${resposta}</div>`;
-}
