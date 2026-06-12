@@ -17,19 +17,20 @@ def cadastro(request):
         
     return render(request, 'paginas/cadastro.html', {'form': form})
 
+# usuarios/views.py
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-
-            user = authenticate(username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect('vendas')
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('vendas')
+        else:
+            return render(request, 'paginas/login.html', {'erro': 'Usuário ou senha incorretos.'})
     return render(request, 'paginas/login.html')
 
 def logout_view(request):

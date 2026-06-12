@@ -1,57 +1,103 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - MMotos</title>
-
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Login — MMotos</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 </head>
-<body class="backgroundCd">
+<body>
+    <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">M<span>Motos</span></a>
+    </div>
+  </header>
 
-<div class="auth-container">
+    <div class="auth-wrapper" style="--bg-image: url('{% static 'img/motoa.jpg' %}')">
 
-    <div class="auth-card">
-        <a href="/" class="logoCd">Login</a>
+        <!-- Painel esquerdo: formulário -->
+        <div class="auth-panel">
 
-        <form method="POST">
-            {% csrf_token %}
+            <div class="auth-content">
+                <h1 class="auth-title">Faça seu login<span class="title-dot">.</span></h1>
 
-            <div class="form-group">
-                {{ form.email.label_tag }}
-                {{ form.email }}
+                {% if messages %}
+                    <ul class="auth-messages">
+                        {% for message in messages %}
+                            <li class="message message--{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <form method="POST" action="{% url 'login' %}" class="auth-form" novalidate>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_username" class="form-label">Email:</label>
+                        <input
+                            type="text"
+                            name="username"
+                            id="id_username"
+                            class="form-input"
+                            placeholder="Digite seu email..."
+                            autofocus
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password" class="form-label">Senha:</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="id_password"
+                            class="form-input"
+                            placeholder="Digite sua senha..."
+                            required
+                        >
+                    </div>
+
+                    <div class="form-extras">
+                        <a href="/usuarios/login/#" class="nav-links">Esqueci minha senha!</a>
+                    </div>
+
+                    <button type="submit" class="btn-auth">Entrar</button>
+
+                </form>
+
+                <div class="auth-footer">
+                    <a href="{% url 'cadastro' %}" class="link-switch">Ainda não tenho uma conta &#8594;</a>
+                </div>
             </div>
 
-            <div class="form-group">
-                {{ form.password.label_tag }}
-                {{ form.password }}
-            </div>
+        </div>
 
-            <label>
-                <input type="checkbox">
-                Lembrar de mim
-            </label>
-
-            <a href="#">
-                Esqueci minha senha
-            </a>
-
-            <button type="submit" class="btn-auth">
-                Entrar
-            </button>
-
-            <p class="auth-link">
-                Não possui conta?
-                <a href="{% url 'cadastro' %}">
-                    Cadastre-se
-                </a>
-            </p>
-
-        </form>
     </div>
 
-</div>
+    <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>MMotos</h4>
+        <p>Sua loja especializada em peças e serviços para motos. Qualidade e confiança desde 2020.</p>
+      </div>
+      
+      
+      
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <p>contato@mmotos.com.br</p>
+        <p>(11) 99999-9999</p>
+        <p>Pernambuco - PE</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 MMotos. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 
+
+    <script src="{% static 'js/auth.js' %}"></script>
 </body>
 </html>
