@@ -73,6 +73,10 @@
                 Qual categoria deseja visualizar?
             </div>
 
+            <button class="chat-option" onclick="detalheFrete()">
+                Frete
+            </button>
+
             <button class="chat-option" onclick="mostrarPneus()">
                 Pneus
             </button>
@@ -85,6 +89,21 @@
                 Voltar
             </button>
         `);
+    }
+
+    function detalheFrete() {
+        atualizarChat(`
+            <div class="bot-message">
+                O frete é fixo, ou seja, independete da distancia da entrega o valor é de R$ 15,00.<br>OBS:Entregamos apenas para a região de Recife e proximidades.
+                <BR>NÃO RESERVAMOS PRODUTOS
+                
+            </div>
+
+            <button class="chat-option" onclick="menuInicial()">
+                Voltar
+            </button>
+
+            `);
     }
 
     function mostrarPneus() {
@@ -129,8 +148,10 @@
                 Realizamos:
                 <br>• Troca de óleo
                 <br>• Revisão
-                <br>• Freios
                 <br>• Manutenção geral
+                <BR>• Entre muito mais!
+                <br>OBS:agendamentos também podem ser feitos por telefone ou presencialmente.
+                <br>Atendimento por ondem de chegada.
             </div>
 
             <button class="chat-option"
@@ -151,6 +172,11 @@
                 Segunda a Sexta: 8h às 18h
                 <br>
                 Sábado: 8h às 14h
+                <br>
+                Domingo e Feriados: Fechado
+                <br>
+                Atendimento por ondem de chegada.
+
             </div>
 
             <button class="chat-option"

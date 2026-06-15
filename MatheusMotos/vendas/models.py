@@ -2,6 +2,9 @@ from django.db import models
 from django.urls import reverse
 from django.core.validators import MinValueValidator
 from datetime import timedelta
+from django.utils import timezone
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class categoria(models.Model):
@@ -47,7 +50,7 @@ class servico (models.Model):
     nome = models.CharField(max_length=50)
     valor = models.DecimalField(max_digits=10, decimal_places=2)
     descricao = models.TextField(blank=True, null=True)
-    quantidade = models.PositiveIntegerField(validators=[MinValueValidator(1)],default=1)
+    #quantidade = models.PositiveIntegerField(validators=[MinValueValidator(1)],default=1)
     imagem = models.ImageField('foto', upload_to='fotos/', blank=True, null=True)
     disponivel = models.BooleanField('Disponivel', default =True)
     duracao = models.DurationField(default = timedelta(hours=1))
@@ -62,8 +65,15 @@ class servico (models.Model):
     
 class cliente (models.Model):
     nome = models.CharField(max_length=50)
-    #telefone = models.CharFild(max_length=11)
+    telefone = models.CharField(max_length=11, default='Não informado')
     cpf = models.CharField(max_length=11, unique=True)
+
+    usuario = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='perfil',
+        null=True,
+        blank=True)
 
     class Meta: 
         verbose_name = 'cliente'
@@ -74,11 +84,10 @@ class cliente (models.Model):
         return self.nome
     
 class agendamento (models.Model):
-    data_hora = models.DateTimeField(verbose_name='Data e Hora do Agendamento')
+    data_agendada = models.DateTimeField(verbose_name='Data do Agendamento', default= timezone.now)
 
     STATUS_CHOICES = [
         ('P', 'Pendente'),
-        ('C', 'Confirmado'),
         ('F', 'Finalizado'),
         ('X', 'Cancelado'),
     ]
@@ -108,10 +117,12 @@ class agendamento (models.Model):
     class Meta: 
         verbose_name = 'agendamento'
         verbose_name_plural = 'agendamento'
-        ordering =  ['data_hora']
+        ordering =  ['data_agendada']
 
     def __str__(self):
         return f'{self.cliente} - {self.servico}'
+
+
 
 
 

@@ -151,3 +151,5 @@ JAZZMIN_SETTINGS = {
     ],
     "copyright": "MMotos - 2024",
 }
+
+LOGIN_URL = '/login/'

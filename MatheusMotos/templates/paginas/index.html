@@ -8,12 +8,6 @@
   <title>MMotos - Peças e Serviços para Motos</title>
   <meta name="description" content="Loja especializada em peças e serviços para motos. Qualidade e confiança para você rodar com segurança.">
   
-  <!-- Fonte -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS -->
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -28,7 +22,6 @@
           <li><a href="{% url 'vendas' %}" class="active">Início</a></li>
           <li><a href="{% url 'produtos' %}">Produtos</a></li>
           <li><a href="{% url 'servicos' %}">Serviços</a></li>
-          <li><a href="/#">Contato</a></li>
         </ul>
         
         <a href="{% url 'carrinho' %}" class="cart-btn">
@@ -38,11 +31,33 @@
           <span class="cart-count" style="display:none">0</span>
         </a>
 
-        <a href="/#" class="user-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-          </svg>
-        </a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'vendas' %}" class="userBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor  " viewBox="0 0 16 16" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+            </svg>
+
+            <div class="userText">
+              <span>Olá,</span>
+              <small>{{ user.username }}</small>
+            </div>
+          </a>
+          <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="cursor:pointer;color:#b12a2a;">
+              Sair
+            </button>
+        {% else %}
+          <a href="{% url 'login' %}" class="userBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor  " viewBox="0 0 16 16" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+            </svg>
+            <div class="userText">
+              <span>Entrar</span>
+              <small>Cadastre-se</small>
+            </div>
+          </a>
+        {% endif %}
         
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:24px;height:24px">
@@ -52,6 +67,7 @@
       </nav>
     </div>
   </header>
+  {% csrf_token %}
 
   <!-- HERO -->
   <section class="hero">
@@ -65,7 +81,6 @@
         </div>
       </div>
       <div class="hero-image">
-        <!-- Adicione uma imagem de moto aqui -->
         <div style="width:350px;height:250px;background:rgba(255,255,255,0.1);border-radius:1rem;display:flex;align-items:center;justify-content:center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:100px;height:100px;opacity:0.5">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10 M16.5 9.5L14 6h-3 M3 11h10" />
@@ -140,7 +155,7 @@
     </div>
   </section>
 
-  <!-- PRODUTOS EM DESTAQUE -->
+  <!-- PRODUTOS DESTAQUE -->
   <section class="section" style="background-color: var(--white)">
     <div class="section-header">
       <h2>Produtos em Destaque</h2>
@@ -148,7 +163,7 @@
     </div>
     
     <div class="products-grid">
-      <!-- Produto 1 -->
+      <!-- Produtos -->
       {% for produto in produtos %}
       <div class="product-card">
         <div class="product-image">
@@ -169,90 +184,26 @@
             <span class="product-price">R$ {{ produto.valor|floatformat:2 }}</span>
             <span class="product-stock">Em estoque</span>
           </div>
-          <button class="btn btn-primary" style="width:100%;margin-top:1rem" 
-            onclick="addToCart({
+          <button type="button" class="btn btn-primary" style="width:100%;margin-top:1rem" 
+            onclick="abrirModal({
               id:'{{ produto.id }}',
               name:'{{ produto.nome }}',
-              price: Math.round(parseFloat('{{ produto.valor }}') * 100),
-              type:'product'
-              })">
-            Adicionar ao Carrinho
+              image:'{{ produto.imagem.url }}',
+              desc: `{{ produto.descricao|escapejs }}`,
+              price: Math.floor(parseFloat('{{ produto.valor }}') * 100),
+              type:'produto'})">
+            Ver Produto
           </button>
         </div>
       </div>
       {% endfor %}
       
-      <!-- Produto 2 -->
-      <div class="product-card">
-        <div class="product-image">
-          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-        </div>
-        <div class="product-content">
-          <span class="product-category">Pneus</span>
-          <h3 class="product-name">Pneu Traseiro Sport 180/55</h3>
-          <p class="product-description">Pneu traseiro de alta performance para motos esportivas</p>
-          <div class="product-footer">
-            <span class="product-price">R$ 599,00</span>
-            <span class="product-stock low">Restam 8</span>
-          </div>
-          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
-            onclick="addToCart({id:'pneu-traseiro-sport', name:'Pneu Traseiro Sport 180/55', price:59900, type:'product'})">
-            Adicionar ao Carrinho
-          </button>
-        </div>
-      </div>
-      
-      <!-- Produto 3 -->
-      <div class="product-card">
-        <div class="product-image">
-          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-        </div>
-        <div class="product-content">
-          <span class="product-category">Óleos</span>
-          <h3 class="product-name">Óleo Motor 10W40 Sintético</h3>
-          <p class="product-description">Óleo sintético de alta performance 1L</p>
-          <div class="product-footer">
-            <span class="product-price">R$ 79,00</span>
-            <span class="product-stock">Em estoque</span>
-          </div>
-          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
-            onclick="addToCart({id:'oleo-motor-10w40', name:'Óleo Motor 10W40 Sintético', price:7900, type:'product'})">
-            Adicionar ao Carrinho
-          </button>
-        </div>
-      </div>
-      
-      <!-- Produto 4 -->
-      <div class="product-card">
-        <div class="product-image">
-          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-        </div>
-        <div class="product-content">
-          <span class="product-category">Peças de Motor</span>
-          <h3 class="product-name">Kit Relação Completo</h3>
-          <p class="product-description">Kit com coroa, pinhão e corrente</p>
-          <div class="product-footer">
-            <span class="product-price">R$ 299,00</span>
-            <span class="product-stock">Em estoque</span>
-          </div>
-          <button class="btn btn-primary" style="width:100%;margin-top:1rem"
-            onclick="addToCart({id:'kit-relacao', name:'Kit Relação Completo', price:29900, type:'product'})">
-            Adicionar ao Carrinho
-          </button>
-        </div>
-      </div>
-    </div>
     
+    
+  </section>
     <div style="text-align:center;margin-top:2rem">
       <a href="{% url 'produtos' %}" class="btn btn-outline">Ver Todos os Produtos</a>
     </div>
-  </section>
 
   <!-- SERVIÇOS -->
   <section class="section">
@@ -282,44 +233,6 @@
         </div>
       </div>
       {% endfor %}
-      
-      <div class="service-card">
-        <div class="service-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-          </svg>
-        </div>
-        <h3 class="service-name">Troca de Óleo</h3>
-        <p class="service-description">Troca de óleo do motor com filtro incluso</p>
-        <div class="service-footer">
-          <span class="service-price">R$ 80,00</span>
-          <span class="service-duration">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:16px;height:16px">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            30min
-          </span>
-        </div>
-      </div>
-      
-      <div class="service-card">
-        <div class="service-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <h3 class="service-name">Balanceamento de Rodas</h3>
-        <p class="service-description">Balanceamento das duas rodas para maior estabilidade</p>
-        <div class="service-footer">
-          <span class="service-price">R$ 60,00</span>
-          <span class="service-duration">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:16px;height:16px">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            45min
-          </span>
-        </div>
-      </div>
     </div>
     
     <div style="text-align:center;margin-top:2rem">
@@ -414,7 +327,7 @@
     </div>
   </footer>
 
-  <button id="chat-bot-btn" class="cbBtn">?</button>
+  <button type="button" id="chat-bot-btn" class="cbBtn">?</button>
 
   <div id="chat-bot-box" class="cbBox">
     <div class="cbHeader">Assistente MMotos</div>

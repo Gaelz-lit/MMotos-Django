@@ -175,7 +175,7 @@ img {
 .nav {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .nav-links {
@@ -210,17 +210,36 @@ img {
 }
 
 .userBtn {
-  position: relative;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--text);
+  white-space: nowrap;
+  justify-content: center;
 }
 
 .userBtn svg {
   width: 24px;
   height: 24px;
   color: var(--text);
+  flex-shrink: 0;
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.userText span {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.userText small {
+  font-size: 0.7rem;
+  color: #666;
 }
 
 .cart-count {
@@ -732,7 +751,6 @@ img {
   background-color: var(--primary-dark);
   color: var(--white);
   padding: 3rem 1rem 1.5rem;
-  margin-top: 4rem;
 }
 
 .footer-content {
@@ -886,7 +904,7 @@ img {
 .cbBtn {
     position: fixed;
     bottom: 20px;
-    right: 20px;   /* TEM QUE SER RIGHT */
+    right: 20px;
     
     width: 60px;
     height: 60px;
@@ -998,34 +1016,40 @@ img {
 
 /* ===== Usuarios App ===== */
 
-.backgroundCd{
+.bg{
     min-height: 100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #939393,
+        #c9c9c9,
+        #c2c3c4
+    );
+
+    position: relative;
+    overflow: hidden;
 }
 
 .auth-container{
-    width: 100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    width: 420px;
+    background: rgba(20, 20, 25, 0.92);
+    backdrop-filter: blur(8px);
 
-    position: relative;
-    z-index: 1;
+    padding: 40px;
+    border-radius: 20px;
+
+    color: white;
+    z-index: 10;
 }
 
 .auth-card{
-    width:700px;
-    padding:60px;
-    border-radius:30px;
+    width:420px;
+    padding:40px;
+    border-radius:25px;
     backdrop-filter: blur(25px);
     background: rgba(255,255,255,.12);
     border: 1px solid rgba(255,255,255,.15);
@@ -1041,33 +1065,98 @@ img {
     font-size:42px;
     font-weight:500;
     text-align:center;
-    margin-bottom:40px;
+    margin-bottom:10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #b0b0b0;
+    margin-bottom: 35px;
+}
+
+.auth-info{
+    width: 40%;
+}
+
+.auth-info h1{
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.auth-info p{
+    color: var(--primary);
+    line-height: 1.8;
+}
+
+.lrj {
+  color: var(--accent)
 }
 
 .form-group{
     display:flex;
     flex-direction:column;
-    margin-bottom:15px;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .form-group input{
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
+    width: 250px;
+    height: 50px;
+    border: 1px solid #9f9f9f;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.539);
+    color: #333333;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-size: 13px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    caret-color: #333333;
+    border-color: var(--border);
 }
 
 .btn-auth{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.2s;
+}
+
+.btn-auth:hover {
+    background: var(--primary-light);
 }
 
 .auth-link{
-    text-align:center;
-    margin-top:15px;
+    text-align: center;
+    margin-top: 25px;
+    color: var(--text);
+}
+
+.auth-link a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-link a:hover {
+    color: var(--primary-light);
 }
 
 /* ===== Cadastro ===== */
@@ -1083,4 +1172,325 @@ img {
   font-size: 3.5rem;
   font-weight: 700;
   color: var(--accent);
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.c1 {
+    width: 300px;
+    height: 300px;
+    background: #e9af5d;
+    top: -100px;
+    left: -100px;
+}
+
+.c2 {
+    width: 250px;
+    height: 250px;
+    background: #396195;
+    bottom: -80px;
+    right: -80px;
+}
+
+.c3 {
+    width: 180px;
+    height: 180px;
+    background: #d9dadb;
+    top: 60%;
+    left: 15%;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-card{
+    display: flex;
+    gap: 30px;
+    border-radius: 20px;
+    width:800px;
+    padding: 30px;
+    align-items: flex-start;
+    background-color: var(--background);
+}
+
+.modal-card img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.modal-img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.modal-info{
+    flex: 1;
+}
+
+.qtd-box {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.qtd-box button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+#quantidade {
+    width: 70px;
+    text-align: center;
+    border-radius: 20px;
+    border-color: rgba(0, 0, 0, 0.564);
+}
+
+/* ===== AUTENTICAÇÃO ===== */
+
+/* --- Layout principal --- */
+.aut {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    min-height: 90vh;
+    background-image: var(--bg-image);
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    align-items: center;
+}
+
+.aut::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 0;
+}
+
+.aut-painel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+    height: 90vh;
+    width: 420px;
+    min-width: 320px;
+    padding: 3rem 3rem 2.5rem;
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(15px);
+    border-radius: 0px 20px 20px 0px;
+    box-shadow: 0 0 0 var(--border);
+}
+
+.aut-conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.aut-titulo {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+}
+
+.ponto {
+    color: var(--primary);
+}
+
+/* --- Descrição --- */
+.auth-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* --- Mensagens de feedback --- */
+.auth-messages {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.message {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+}
+
+.message--error {
+    background: var(--danger);
+    color: var(--white);
+}
+
+.message--success {
+    background: var(--success);
+    color: var(--white);
+}
+
+.message--info {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* --- Formulário --- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* --- Label --- */
+.form-label {
+    font-size: 1.275rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--primary);
+}
+
+.label-icon {
+    font-size: 0.875rem;
+}
+
+/* --- Input --- */
+.form-input,
+.auth-form input[type="text"],
+.auth-form input[type="password"],
+.auth-form input[type="email"] {
+    width: 100%;
+    padding: 0.65rem 0.875rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #ffffff50;
+    color: var(--text);
+    border-color: var(--primary);
+}
+
+.form-input:focus,
+.auth-form input[type="text"]:focus,
+.auth-form input[type="password"]:focus,
+.auth-form input[type="email"]:focus {
+    border-color: #ffffff00;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Erros de campo --- */
+.field-errors {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.field-errors li {
+    font-size: 0.8rem;
+}
+
+/* --- "Esqueci minha senha" --- */
+.form-extras {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -0.5rem;
+}
+
+.link-forgot {
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+
+/* --- Rodapé da tela --- */
+.auth-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.link-switch {
+    gap: 1.5rem;
+    list-style: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    color: var(--text);
+}
+
+.link-switch:hover,
+.link-switch.active {
+  color: var(--primary);
+}
+
+/* --- Painel direito (visual / decoração) --- */
+.auth-visual {
+    flex: 1;
+    background-size: cover;
+    min-height: 100%;
+    background-position: center;
+}
+
+/* --- Responsivo (Autenticação) --- */
+@media (max-width: 768px) {
+    .auth-wrapper {
+        flex-direction: column;
+    }
+
+    .auth-panel {
+        width: 100%;
+        padding: 2rem 1.5rem;
+    }
+
+    .auth-visual {
+        display: none;
+    }
+}
+
+.aut .form-group input {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    background: #ffffff50;
+    color: var(--text);
+    padding: 0.65rem 0.875rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    font-size: 0.9375rem;
 }

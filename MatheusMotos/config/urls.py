@@ -13,7 +13,7 @@ urlpatterns = [
      #path('', include('vendas.urls')),
     path('admin/', admin.site.urls),
     path('',include('vendas.urls')),
-    path('usuarios/', include('usuarios.urls')),
+    path('', include('usuarios.urls')),
 ]
 
 if settings.DEBUG:
